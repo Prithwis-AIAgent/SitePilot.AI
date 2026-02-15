@@ -11,9 +11,9 @@ export const Portfolio = () => {
                         Prithwis Das
                     </div>
                     <div className="hidden md:flex space-x-8">
-                        <a href="#about" className="hover:text-blue-600 transition-colors">About</a>
-                        <a href="#projects" className="hover:text-blue-600 transition-colors">Projects</a>
-                        <a href="#contact" className="hover:text-blue-600 transition-colors">Contact</a>
+                        <a href="#about" id="nav-about" className="hover:text-blue-600 transition-colors">About</a>
+                        <a href="#projects" id="nav-projects" className="hover:text-blue-600 transition-colors">Projects</a>
+                        <a href="#contact" id="nav-contact" className="hover:text-blue-600 transition-colors">Contact</a>
                     </div>
                 </div>
             </nav>
@@ -39,6 +39,7 @@ export const Portfolio = () => {
                         href="https://github.com/Prithwis-AIAgent"
                         target="_blank"
                         rel="noopener noreferrer"
+                        id="link-github-hero"
                         className="px-8 py-4 bg-gray-900 text-white rounded-full font-semibold hover:bg-gray-800 transition-all flex items-center gap-2"
                     >
                         <Github className="w-5 h-5" /> GitHub
@@ -202,7 +203,12 @@ export const Portfolio = () => {
                                     />
                                 </div>
 
-                                <button type="button" onClick={() => alert("This is a demo form co-browsable by the agent.")} className="w-full py-4 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/20">
+                                <button
+                                    type="button"
+                                    id="btn-send-message"
+                                    onClick={() => alert("This is a demo form co-browsable by the agent.")}
+                                    className="w-full py-4 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/20"
+                                >
                                     Send Message
                                 </button>
                             </form>
