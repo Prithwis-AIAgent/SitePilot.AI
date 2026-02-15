@@ -8,7 +8,7 @@ if (!apiKey) {
 const genAI = new GoogleGenerativeAI(apiKey || "");
 
 const model = genAI.getGenerativeModel({
-    model: "gemini-1.5-flash", // Updated to optimized flash model
+    model: "gemini-1.5-flash-latest", // Updated to specific version to resolve 404
     systemInstruction: `You are SitePilot, an advanced, intelligent, and friendly co-browsing agent. 
   Your goal is to help users navigate and interact with the portfolio website seamlessly.
 
