@@ -39,7 +39,7 @@ export const extractDOM = (): string => {
                 if (!isElementVisible(el)) return NodeFilter.FILTER_REJECT;
                 if (['SCRIPT', 'STYLE', 'NOSCRIPT', 'IFRAME', 'SVG', 'PATH'].includes(el.tagName)) return NodeFilter.FILTER_REJECT;
                 // Prioritize specific tags
-                if (['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'P', 'BUTTON', 'A', 'INPUT', 'TEXTAREA', 'LABEL', 'SECTION', 'DIV'].includes(el.tagName)) {
+                if (['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'P', 'BUTTON', 'A', 'INPUT', 'TEXTAREA', 'LABEL', 'SECTION', 'DIV', 'IMG', 'UL', 'LI'].includes(el.tagName)) {
                     return NodeFilter.FILTER_ACCEPT;
                 }
                 return NodeFilter.FILTER_SKIP; // Skip container tags but traverse children
@@ -64,6 +64,13 @@ export const extractDOM = (): string => {
         } else if (tag === 'BUTTON' || (tag === 'A' && el.getAttribute('href'))) {
             const label = text || el.getAttribute('aria-label') || 'Link';
             markdown += `[${tag}]: ${label}${id}\n`;
+        } else if (tag === 'IMG') {
+            const alt = el.getAttribute('alt');
+            if (alt) {
+                markdown += `[IMG]: ${alt}${id}\n`;
+            }
+        } else if (tag === 'LI' && text) {
+            markdown += `- ${text}\n`;
         } else if (tag === 'INPUT' || tag === 'TEXTAREA') {
             const type = el.getAttribute('type') || 'text';
             const placeholder = el.getAttribute('placeholder') || '';
