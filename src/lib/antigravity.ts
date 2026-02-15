@@ -60,11 +60,19 @@ export class Antigravity {
             }
 
             return actions;
-        } catch (error) {
+        } catch (error: any) {
             console.error("Antigravity Error:", error);
+            let errorMessage = "I encountered an error processing your request.";
+
+            if (error.message) {
+                if (error.message.includes('API key')) errorMessage += " (Invalid API Key)";
+                else if (error.message.includes('quota')) errorMessage += " (Quota Exceeded)";
+                else errorMessage += ` (${error.message})`;
+            }
+
             return [{
                 type: 'response',
-                content: "I encountered an error processing your request."
+                content: errorMessage
             }];
         }
     }
