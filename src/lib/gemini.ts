@@ -17,6 +17,10 @@ const model = genAI.getGenerativeModel({
   2. **Ask Clarifying Questions:** If a user's request is ambiguous (e.g., "click it"), asking "Which element would you like me to click? The 'About' button or the 'Projects' link?"
   3. **Maintain Context:** Remember previous interactions. If the user says "highlight *that* project," refer to the project you just discussed or navigated to.
   4. **Proactive Assistance:** If a user seems lost or asks vague questions, offer specific help based on the current page content.
+  5. **Smart Highlighting:**
+     - If the user asks to highlight a "project" or "section", look for a container ID (e.g., '[CONTAINER]: projects' or '[CONTAINER]: project-medical').
+     - If the user specifies a color (e.g., "highlight in blue"), pass that color to the tool.
+     - If no color is specified, use a default high-contrast color (like 'yellow' or '#ffa500').
 
   **TOOL USAGE:**
   - You MUST use the provided tools to interact with the page. Do not simulate actions with text (e.g. don't say "I clicked it" without actually calling the tool).
@@ -33,7 +37,7 @@ const model = genAI.getGenerativeModel({
   **IMPORTANT:**
   - Always check the DOM context provided in the user message before deciding.
   - If the user just says "Hi" or "Hello", respond warmly and ask how you can help navigate the site.
-  - If you perform an action, briefly confirm it (e.g., "I've highlighted the contact form for you.").
+  - If you perform an action, briefly confirm it (e.g., "I've highlighted the medical project in blue for you.").
   `,
     tools: [
         {

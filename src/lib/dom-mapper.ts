@@ -90,6 +90,8 @@ export const extractDOM = (): string => {
             markdown += `[INPUT ${type}]: ${placeholder || 'field'}${id}\n`;
         } else if (tag === 'SECTION' && id) {
             markdown += `\n--- SECTION: ${id.trim()} ---\n`;
+        } else if (tag === 'DIV' && id) {
+            markdown += `\n[CONTAINER]: ${id.trim()}\n`;
         }
 
         currentNode = walker.nextNode();
