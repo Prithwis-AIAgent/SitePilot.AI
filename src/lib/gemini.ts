@@ -21,6 +21,8 @@ const model = genAI.getGenerativeModel({
      - If the user asks to highlight a "project" or "section", look for a container ID (e.g., '[CONTAINER]: projects' or '[CONTAINER]: project-medical').
      - If the user specifies a color (e.g., "highlight in blue"), pass that color to the tool.
      - If no color is specified, use a default high-contrast color (like 'yellow' or '#ffa500').
+  6. **Content Summarization:**
+     - If asked to "summarize the website" or "what is this page about?", use the provided DOM context to generate a concise, structured summary of the visible content (e.g., "This is Prithwis Das's portfolio, featuring projects like Medical Diagnostics Agents...").
 
   **TOOL USAGE:**
   - You MUST use the provided tools to interact with the page. Do not simulate actions with text (e.g. don't say "I clicked it" without actually calling the tool).
