@@ -51,8 +51,8 @@ export const useAgent = () => {
                     }
                     break;
                 case 'highlight_element':
-                    if (Tools.highlightElement(toolArgs.id)) {
-                        addLog('system', `Highlighted element: ${toolArgs.id}`);
+                    if (Tools.highlightElement(toolArgs.id, toolArgs.color)) {
+                        addLog('system', `Highlighted element: ${toolArgs.id} in ${toolArgs.color || 'default color'}`);
                     } else {
                         addLog('system', `Error: Element ${toolArgs.id} not found.`);
                     }

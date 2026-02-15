@@ -13,30 +13,34 @@ export const scrollToSection = (id: string): boolean => {
     return false;
 };
 
-export const highlightElement = (id: string): boolean => {
+export const highlightElement = (id: string, color: string = '#3b82f6'): boolean => {
     const elementId = id.replace('#', '');
     const el = document.getElementById(elementId);
     if (el) {
         const originalBorder = el.style.border;
         const originalBoxShadow = el.style.boxShadow;
         const originalTransition = el.style.transition;
+        const originalTransform = el.style.transform;
 
         el.style.transition = 'all 0.5s ease';
-        el.style.border = '2px solid #3b82f6'; // Tailwind blue-500
-        el.style.boxShadow = '0 0 15px rgba(59, 130, 246, 0.6)';
+        el.style.border = `3px solid ${color}`;
+        el.style.boxShadow = `0 0 20px ${color}`;
+        el.style.transform = 'scale(1.02)'; // Slight pop
 
         el.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-        // Remove highlight after 2 seconds
+        // Remove highlight after 3 seconds
         setTimeout(() => {
             el.style.border = originalBorder;
             el.style.boxShadow = originalBoxShadow;
             el.style.transition = originalTransition;
-        }, 2000);
+            el.style.transform = originalTransform;
+        }, 3000);
         return true;
     }
     return false;
 };
+
 
 export const clickElement = (id: string): boolean => {
     const elementId = id.replace('#', '');

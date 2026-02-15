@@ -47,6 +47,7 @@ const model = genAI.getGenerativeModel({
                         type: SchemaType.OBJECT,
                         properties: {
                             id: { type: SchemaType.STRING, description: "The ID of the element to highlight." },
+                            color: { type: SchemaType.STRING, description: "Optional hex color code or name (e.g. 'yellow', '#ff0000')." },
                         },
                         required: ["id"],
                     },
