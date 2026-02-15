@@ -71,3 +71,62 @@ export const fillForm = (fieldId: string, value: string): boolean => {
     }
     return false;
 };
+
+export const scrollWindow = (direction: 'up' | 'down' | 'top' | 'bottom'): boolean => {
+    switch (direction) {
+        case 'up':
+            window.scrollBy({ top: -window.innerHeight / 2, behavior: 'smooth' });
+            break;
+        case 'down':
+            window.scrollBy({ top: window.innerHeight / 2, behavior: 'smooth' });
+            break;
+        case 'top':
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            break;
+        case 'bottom':
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            break;
+        default:
+            return false;
+    }
+    return true;
+};
+
+export const navigateToPage = (path: string): boolean => {
+    try {
+        if (typeof window !== 'undefined') {
+            window.location.assign(path);
+            return true;
+        }
+        return false;
+    } catch (e) {
+        return false;
+    }
+};
+
+export const zoomElement = (id: string): boolean => {
+    const elementId = id.replace('#', '');
+    const el = document.getElementById(elementId);
+    if (el) {
+        const originalTransition = el.style.transition;
+        const originalTransform = el.style.transform;
+        const originalZIndex = el.style.zIndex;
+
+        el.style.transition = 'transform 0.5s ease, z-index 0s';
+        el.style.zIndex = '50'; // Bring to front
+        el.style.transform = 'scale(1.1)'; // Zoom in 10%
+
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        // Reset after 3 seconds
+        setTimeout(() => {
+            el.style.transform = originalTransform;
+            el.style.zIndex = originalZIndex;
+            setTimeout(() => {
+                el.style.transition = originalTransition;
+            }, 500); // Wait for transition to finish
+        }, 3000);
+        return true;
+    }
+    return false;
+};

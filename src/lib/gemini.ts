@@ -19,6 +19,9 @@ const model = genAI.getGenerativeModel({
   - highlight_element(id): Highlight an element to focus user attention.
   - click_element(id): Click a button or link.
   - fill_form(field_id, value): Fill an input field.
+  - scroll_window(direction): Scroll 'up', 'down', 'top', or 'bottom'.
+  - navigate_to_page(path): Navigate to a page (e.g., '/about').
+  - zoom_element(id): Zoom in on a specific element.
   
   Always check the DOM context provided in the user message before deciding.
   If the user's intent is unclear, ask a clarifying question.
@@ -69,6 +72,39 @@ const model = genAI.getGenerativeModel({
                             value: { type: SchemaType.STRING, description: "The value to enter." },
                         },
                         required: ["field_id", "value"],
+                    },
+                },
+                {
+                    name: "scroll_window",
+                    description: "Scrolls the window in a direction (up, down, top, bottom).",
+                    parameters: {
+                        type: SchemaType.OBJECT,
+                        properties: {
+                            direction: { type: SchemaType.STRING, description: "Direction to scroll: 'up', 'down', 'top', 'bottom'." },
+                        },
+                        required: ["direction"],
+                    },
+                },
+                {
+                    name: "navigate_to_page",
+                    description: "Navigates to a specific page path (e.g., '/about').",
+                    parameters: {
+                        type: SchemaType.OBJECT,
+                        properties: {
+                            path: { type: SchemaType.STRING, description: "The relative path to navigate to." },
+                        },
+                        required: ["path"],
+                    },
+                },
+                {
+                    name: "zoom_element",
+                    description: "Zooms in on a specific element to focus attention.",
+                    parameters: {
+                        type: SchemaType.OBJECT,
+                        properties: {
+                            id: { type: SchemaType.STRING, description: "The ID of the element to zoom in on." },
+                        },
+                        required: ["id"],
                     },
                 },
             ],

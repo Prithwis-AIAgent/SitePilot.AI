@@ -71,6 +71,27 @@ export const useAgent = () => {
                         addLog('system', `Error: Field ${toolArgs.field_id} not found.`);
                     }
                     break;
+                case 'scroll_window':
+                    if (Tools.scrollWindow(toolArgs.direction)) {
+                        addLog('system', `Scrolled window: ${toolArgs.direction}`);
+                    } else {
+                        addLog('system', `Error: Invalid scroll direction ${toolArgs.direction}`);
+                    }
+                    break;
+                case 'navigate_to_page':
+                    if (Tools.navigateToPage(toolArgs.path)) {
+                        addLog('system', `Navigating to: ${toolArgs.path}`);
+                    } else {
+                        addLog('system', `Error: Invalid path ${toolArgs.path}`);
+                    }
+                    break;
+                case 'zoom_element':
+                    if (Tools.zoomElement(toolArgs.id)) {
+                        addLog('system', `Zoomed in on element: ${toolArgs.id}`);
+                    } else {
+                        addLog('system', `Error: Element ${toolArgs.id} not found.`);
+                    }
+                    break;
                 default:
                     addLog('system', `Unknown tool: ${toolName}`);
             }
