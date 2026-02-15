@@ -8,7 +8,7 @@ if (!apiKey) {
 const genAI = new GoogleGenerativeAI(apiKey || "");
 
 const model = genAI.getGenerativeModel({
-    model: "gemini-1.5-flash-001", // Using stable version tag
+    model: "gemini-3-flash-preview", // Updated to available preview model
     systemInstruction: `You are SitePilot, an advanced, intelligent, and friendly co-browsing agent. 
   Your goal is to help users navigate and interact with the portfolio website seamlessly.
 
