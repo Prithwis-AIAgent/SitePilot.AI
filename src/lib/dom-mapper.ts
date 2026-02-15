@@ -26,6 +26,9 @@ function cleanText(text: string): string {
  * Traverses the DOM and returns a markdown-like string representation.
  * Focuses on headings, paragraphs, interactive elements (buttons, links, inputs).
  */
+const MAX_TEXT_LENGTH = 300;
+const MAX_DOM_LENGTH = 50000;
+
 export const extractDOM = (): string => {
     if (typeof window === 'undefined') return '';
 
@@ -50,10 +53,20 @@ export const extractDOM = (): string => {
     let currentNode = walker.nextNode();
 
     while (currentNode) {
+        if (markdown.length > MAX_DOM_LENGTH) {
+            markdown += '\n...[Content Truncated]...';
+            break;
+        }
+
         const el = currentNode as HTMLElement;
         const tag = el.tagName;
         const id = el.id ? ` #${el.id}` : '';
-        const text = cleanText(el.innerText || (el as HTMLInputElement).value || (el as HTMLInputElement).placeholder || '');
+        let text = cleanText(el.innerText || (el as HTMLInputElement).value || (el as HTMLInputElement).placeholder || '');
+
+        // Truncate long text
+        if (text.length > MAX_TEXT_LENGTH) {
+            text = text.substring(0, MAX_TEXT_LENGTH) + '...';
+        }
 
         // Only include elements with meaningful content or interactivity
         if (tag.startsWith('H') && tag.length === 2 && text) {
